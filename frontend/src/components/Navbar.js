@@ -1,35 +1,28 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
   },
-});
+}));
 
-export default function CenteredTabs() {
+export default function BasicButtonGroup() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
   return (
-    <Paper className={classes.root}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        indicatorColor="primary"
-        textColor="primary"
-        centered
-      >
-        <Tab label="Specific Date" />
-        <Tab label="Today" />
-      </Tabs>
-    </Paper>
+    <div className={classes.root}>      
+      <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
+        <Button href='/'>Today</Button>
+        <Button href='/SpecificDate'>Date</Button>        
+      </ButtonGroup>
+    </div>
   );
 }

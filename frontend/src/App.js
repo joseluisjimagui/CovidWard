@@ -1,7 +1,8 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Today from './components/Today';
 import Navbar from './components/Navbar';
+import Today from './components/Today';
+import SpecificDate from './components/SpecificDate'
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
       <Navbar/>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Today />} />          
+          <Route path="/" element={<Today />} />    
+          <Route path="/SpecificDate" element={<SpecificDate />} />          
         </Routes>
       </BrowserRouter>
     </div>
