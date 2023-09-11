@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Bar } from 'react-chartjs-2';
+import DatePicker from './DatePicker'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -90,6 +91,8 @@ export default class
   render() {
     return (
       <div>        
+        <h1>Date</h1>
+        <DatePicker />
         <canvas id="myChart"></canvas>
         <Bar data={this.midata} options={this.misoptions} />
       </div>

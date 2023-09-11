@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Button from '@material-ui/core/Button';
 import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -91,9 +90,7 @@ export default class
   render() {
     return (
       <div>
-        <Button variant="contained" color="primary">
-          Hello World
-        </Button>
+        <h1>Today</h1>
         <canvas id="myChart"></canvas>
         <Bar data={this.midata} options={this.misoptions} />
       </div>
