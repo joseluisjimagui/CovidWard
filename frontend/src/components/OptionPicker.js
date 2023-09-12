@@ -31,9 +31,9 @@ export default function ControlledOpenSelect({list}) {
   };
 
   const handleOpen = () => {
-    console.log('Handle open')
+    //console.log('Handle open')
     setOpen(true);
-    console.log(list)
+    //console.log(list)
    
   };
 

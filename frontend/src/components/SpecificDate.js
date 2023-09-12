@@ -27,7 +27,7 @@ ChartJS.register(
     Filler
 );
 
-var statesList = []
+var propList = []
 
 
 export default class
@@ -37,8 +37,8 @@ export default class
         resList: [],
     }
 
-    beneficios = [72, 56, 20, 36, 80, 40, 30, -20, 25, 30, 12, 60];
-    meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    beneficios = [56886, 0, 0, 0, 1731628, 33, 1293, 0, 0, 2, 0, 0, 305, 1293, 0, 1731628, 68693, 1660758, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 56886, 0, 56886, 0, 0, 0, 0, 0, 0, 0, 0]
+    meses = ['positive', 'probableCases', 'negative', 'pending', 'totalTestResults', 'hospitalizedCurrently', 'hospitalizedCumulative', 'inIcuCurrently', 'inIcuCumulative', 'onVentilatorCurrently', 'onVentilatorCumulative', 'recovered', 'death', 'hospitalized', 'hospitalizedDischarged', 'totalTestsViral', 'positiveTestsViral', 'negativeTestsViral', 'positiveCasesViral', 'deathConfirmed', 'deathProbable', 'totalTestEncountersViral', 'totalTestsPeopleViral', 'totalTestsAntibody', 'positiveTestsAntibody', 'negativeTestsAntibody', 'totalTestsPeopleAntibody', 'positiveTestsPeopleAntibody', 'negativeTestsPeopleAntibody', 'totalTestsPeopleAntigen', 'positiveTestsPeopleAntigen', 'totalTestsAntigen', 'positiveTestsAntigen', 'positiveIncrease', 'negativeIncrease', 'total', 'totalTestResultsIncrease', 'posNeg', 'dataQualityGrade', 'deathIncrease', 'hospitalizedIncrease', 'commercialScore', 'negativeRegularScore', 'negativeScore', 'positiveScore', 'score']
 
     misoptions = {
         responsive: true,
@@ -76,24 +76,24 @@ export default class
 
 
 
-        console.log('Mounting...')
+        //console.log('Mounting...')
         this.state.resList.forEach(function (element) {
-            //statesList.push(element.state)
-            statesList.push(element)
+            //propList.push(element.state)
+            propList.push(element)
         })
-        console.log(statesList)
+        //console.log(propList)
 
     };
 
     check() {
 
-        /*console.log(Object.keys(this.state.resList));
+        /*//console.log(Object.keys(this.state.resList));
         this.myLabel = Object.keys(this.state.resList)
-        console.log(this.myLabel)
+        //console.log(this.myLabel)
         
-        console.log(Object.values(this.state.resList));   
+        //console.log(Object.values(this.state.resList));   
         this.values = Object.values(this.state.resList)   
-        console.log(this.myData)
+        //console.log(this.myData)
         */
         //this.state.myData
     }
@@ -103,7 +103,7 @@ export default class
             <div>
                 <h1>Date</h1>
                 <DatePicker />
-                <OptionPicker list={statesList} />
+                <OptionPicker list={propList} />
                 <Button onClick={() => { this.check() }} variant="contained" color="primary">
                     Check it
                 </Button>

@@ -21,7 +21,7 @@ export default function DatePickers() {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    console.log(selectedDate)
+    //console.log(selectedDate)
   };
 
   

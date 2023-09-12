@@ -1,111 +1,82 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Bar } from 'react-chartjs-2';
+import LineChart from './LineChart';
 import OptionPicker from './OptionPicker'
 import Button from '@material-ui/core/Button';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler,
-} from 'chart.js';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler
-);
-
-var statesList = []
-
+var propList = []
+var currentState = '';
+var myInfo = []
 
 
 export default class Today extends Component {
 
   state = {
-    resList: [],
+    resList: []    
   }
 
-  myData = Object.values(this.state.resList)
-  myLabel = Object.keys(this.state.resList)
+  myData = [10]
+  myLabel = ["oilo"]
   
 
-  options = {
-    responsive: true,
-    animation: false,
-    plugins: {
-      legend: {
-        display: false
-      }
-    },
-    scales: {
-      y: {
-        min: -25,
-        max: 100
-      },
-      x: {
-        ticks: { color: 'rgba(0, 220, 195)' }
-      }
-    }
-  };
-
-  data = {
-    labels: this.myLabel,
-    datasets: [
-      {
-        label: 'Valores Actuales',
-        data: this.myData,
-        backgroundColor: 'rgba(0, 220, 195, 0.5)'
-      }
-    ]
-  };
+  
 
   async componentDidMount() {
     const res = await axios.get(' https://api.covidtracking.com/v1/states/current.json')
     this.state.resList = res.data    
     
+    ////console.log(res.data[0].state)
+    currentState = res.data[0].state
     
-    
-    console.log('Mounting...')
+    ////console.log('Mounting...')
     this.state.resList.forEach(function (element) {            
-      //statesList.push(element.state)
-      statesList.push(element)
+      //propList.push(element.state)
+      propList.push(element)
     })
-    console.log(statesList)    
+    ////console.log(propList)        
     
+    await this.check()
+
   };
 
-  checkRes(res) {
-    //this.state.currentState = res.state
+  checkRes(res) {    
     //delete res.state
     delete res.dateChecked
     delete res.dateModified
     delete res.date
     delete res.hash
-    console.log(res)
+    delete res.state
+    delete res.totalTestResultsSource
+    delete res.lastUpdateEt
+    delete res.checkTimeEt
+    delete res.fips
+    delete res.grade
+    ////console.log(res)
 
   };  
 
   check() {
     
-    /*console.log(Object.keys(this.state.resList));
-    this.myLabel = Object.keys(this.state.resList)
-    console.log(this.myLabel)
+    this.checkRes(this.state.resList[0])
+    this.myLabel = Object.keys(this.state.resList[0])
+    ////console.log(this.myLabel)
+        
+    var list = this.state.resList[0]
+    Object.keys(list).forEach(function(key) {
+      if(list[key] === null) {
+        list[key] = 0
+      }
+  })
+     
+    this.myData = Object.values(this.state.resList[0])   
+    ////console.log(this.myData)
+
+    myInfo = this.myData
     
-    console.log(Object.values(this.state.resList));   
-    this.values = Object.values(this.state.resList)   
-    console.log(this.myData)
-    */
+
+
+    ////console.log(myInfo)
+
     //this.state.myData
   }
 
@@ -113,13 +84,14 @@ export default class Today extends Component {
   render() {
     return (
       <div>
-        <h1>Today</h1>                
-        <OptionPicker list={statesList}/>
+        <h1>Today in </h1>              
+        <h1>{currentState}</h1>  
+        <OptionPicker list={propList}/>
         <Button onClick={() => { this.check() }} variant="contained" color="primary">
           Check it
         </Button>
-        <canvas id="myChart"></canvas>
-        <Bar data={this.data} options={this.options} />
+        <LineChart list={propList}/>
+        
       </div>
     )
   }
