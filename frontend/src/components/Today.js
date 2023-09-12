@@ -72,9 +72,18 @@ export default class Today extends Component {
 
   async componentDidMount() {
     const res = await axios.get(' https://api.covidtracking.com/v1/states/current.json')
-    this.state.resList = res.data
-    console.log(res.data[0])
-  }
+    this.state.resList = res.data    
+    
+    
+    
+    console.log('Mounting...')
+    this.state.resList.forEach(function (element) {            
+      //statesList.push(element.state)
+      statesList.push(element)
+    })
+    console.log(statesList)    
+    
+  };
 
   checkRes(res) {
     //this.state.currentState = res.state
@@ -85,18 +94,10 @@ export default class Today extends Component {
     delete res.hash
     console.log(res)
 
-  }
+  };  
 
   check() {
-
-    console.log(this.state.resList)
-    console.log('Checking...')
-    this.state.resList.forEach(function (element) {
-      //console.log(element.state)
-      
-      statesList.push(element.state)
-    })
-    console.log(statesList)
+    
     /*console.log(Object.keys(this.state.resList));
     this.myLabel = Object.keys(this.state.resList)
     console.log(this.myLabel)
@@ -112,13 +113,13 @@ export default class Today extends Component {
   render() {
     return (
       <div>
-        <h1>Today</h1>        
-        <OptionPicker />
+        <h1>Today</h1>                
+        <OptionPicker list={statesList}/>
         <Button onClick={() => { this.check() }} variant="contained" color="primary">
           Check it
         </Button>
         <canvas id="myChart"></canvas>
-        <Bar data={this.data} options={this.misoptions} />
+        <Bar data={this.data} options={this.options} />
       </div>
     )
   }

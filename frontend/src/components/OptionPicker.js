@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ControlledOpenSelect() {
+export default function ControlledOpenSelect({list}) {
   const classes = useStyles();
   const [age, setAge] = React.useState('');
   const [open, setOpen] = React.useState(false);
@@ -31,8 +31,13 @@ export default function ControlledOpenSelect() {
   };
 
   const handleOpen = () => {
+    console.log('Handle open')
     setOpen(true);
+    console.log(list)
+   
   };
+
+  
 
   return (
     <div>
@@ -50,8 +55,9 @@ export default function ControlledOpenSelect() {
           value={age}
           onChange={handleChange}
         >
-          <MenuItem value="">        
-          </MenuItem>
+          {
+            list.map(item => <MenuItem value={item.hash}>{item.state}</MenuItem>)
+          }
           <MenuItem value={10}>Ten</MenuItem>
           <MenuItem value={20}>Twenty</MenuItem>
           <MenuItem value={30}>Thirty</MenuItem>

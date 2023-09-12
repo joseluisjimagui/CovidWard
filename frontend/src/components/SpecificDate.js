@@ -27,15 +27,14 @@ ChartJS.register(
     Filler
 );
 
-function hola(){
-    console.log("hola")
-}
+var statesList = []
+
 
 export default class
     Today extends Component {
 
     state = {
-        currentState: '',
+        resList: [],
     }
 
     beneficios = [72, 56, 20, 36, 80, 40, 30, -20, 25, 30, 12, 60];
@@ -73,36 +72,39 @@ export default class
 
     async componentDidMount() {
         const res = await axios.get(' https://api.covidtracking.com/v1/states/current.json')
-        console.log(res.data[0])
+        this.state.resList = res.data
 
 
 
+        console.log('Mounting...')
+        this.state.resList.forEach(function (element) {
+            //statesList.push(element.state)
+            statesList.push(element)
+        })
+        console.log(statesList)
+
+    };
+
+    check() {
+
+        /*console.log(Object.keys(this.state.resList));
+        this.myLabel = Object.keys(this.state.resList)
+        console.log(this.myLabel)
+        
+        console.log(Object.values(this.state.resList));   
+        this.values = Object.values(this.state.resList)   
+        console.log(this.myData)
+        */
+        //this.state.myData
     }
-
-    checkRes(res) {
-        this.state.currentState = res.state
-        delete res.state
-        delete res.dateChecked
-        delete res.dateModified
-        delete res.date
-        delete res.hash
-        console.log(res)
-
-    }
-
-    hola(){
-        console.log("hola")
-    }
-
-
 
     render() {
         return (
             <div>
                 <h1>Date</h1>
-                <DatePicker />                
-                <OptionPicker />
-                <Button  onClick={() => { this.hola() }} variant="contained" color="primary">
+                <DatePicker />
+                <OptionPicker list={statesList} />
+                <Button onClick={() => { this.check() }} variant="contained" color="primary">
                     Check it
                 </Button>
                 <canvas id="myChart"></canvas>
